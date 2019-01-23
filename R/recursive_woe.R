@@ -18,7 +18,7 @@ mark_bins <- function(woe, woe_cutoff = 0.1, min_perc)
 recursive_woe <- function(df, variable, dv, woe , breaks , woe_cutoff = 0.1 , min_perc) {
   # Mark bins to merge
   woe$conditions <- mark_bins(woe, woe_cutoff = woe_cutoff, min_perc = min_perc)
-  if(nrow(woe) == 2 | sum(woe$conditions) == 0) return(breaks)
+  if(nrow(woe) == 2 | sum(woe$conditions) == 0 ) return(breaks)
   else{
     num <- as.numeric(min(woe[which(woe$conditions==1),"rank"]))
     #print(num)

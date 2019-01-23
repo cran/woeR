@@ -36,7 +36,6 @@ Weight of Evidence represents the natural log of the ratio of percent of 0's in 
 }
 \examples{
 library(smbinning)
-data("chileancredit")
-woe_binning(chileancredit, "cbs1", "fgood", initial_bins = 10)
+woe_binning(smbsimdf1, "cbs1", "fgood", initial_bins = 10)
 
 }

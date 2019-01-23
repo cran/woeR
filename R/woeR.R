@@ -12,7 +12,7 @@
 #' @param min_perc Minimum percentage of records in each segment. If the percentage of records in a segment falls below this threshold it is merged with other segments. Acceptable values are in the range 0.01-0.2
 #'
 #' @param initial_bins No of segments of the variable to be created in the 1st iteration. Default value = 50(2 percent) for sample size > 1500. Acceptable values are in the range 5-100
-#'
+#' 
 #' @param woe_cutoff Thereshold of the absolute difference in woe values between consecutive segments. If the difference is less than this threshold segments are merged. Acceptable values are in the range 0-0.2
 #'
 #' @return Output is a list containing the following elements : \cr
@@ -25,8 +25,7 @@
 #' @details Weight of Evidence represents the natural log of the ratio of percent of 0's in the segment to percent of 1's in the segment. It is a proxy for how far the dv rate for a segment is from the sample dv rate (# of 1s/# of observations).
 #'
 #' @examples library(smbinning)
-#' data("chileancredit")
-#' woe_binning(chileancredit, "cbs1", "fgood", initial_bins = 10)
+#' woe_binning(smbsimdf1, "cbs1", "fgood", initial_bins = 10)
 #'
 #' @export woe_binning
 #'
@@ -108,7 +107,7 @@ woe_binning1 <- function(df, variable, dv, min_perc = 0.02, initial_bins = 50, w
   # Computing breaks
   #print(initial_bins)
   breaks <- unique(stats::quantile(df[, variable] , probs = seq(0,1,1/initial_bins) , na.rm=T))
-  breaks[initial_bins + 1] <- Inf
+  breaks[length(breaks)] <- Inf
   breaks[1] <- -Inf
   # Compute woe & IV table
   woe <- compute_woe(df = df, variable = variable, dv = dv, breaks = breaks)
